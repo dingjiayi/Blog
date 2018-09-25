@@ -204,3 +204,7 @@ class noncopyable {
 		noncopyable& operator= (const noncopyable&);
 };
 ```
+
+## 4. 参考资料 ##
+1. [C++11 标准新特性：Defaulted 和 Deleted 函数](https://www.ibm.com/developerworks/cn/aix/library/1212_lufang_c11new/index.html)
+2. boost 1.66.0版本 boost\core\noncopyable.hpp
