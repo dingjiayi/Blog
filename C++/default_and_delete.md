@@ -165,3 +165,42 @@ int main(){
 
 ## 2. = delete
 
+### 2.1 引入背景 ###
+为了显式的禁用某个函数，C++11 标准引入了一个新特性：deleted 函数。
+
+### 2.2 使用 ###
+
+```
+class X{            
+public: 
+  X(); 
+  X(const X&) = delete;  // 声明拷贝构造函数为 deleted 函数
+  X& operator = (const X &) = delete; // 声明拷贝赋值操作符为 deleted 函数
+}; 
+
+class Y{ 
+public: 
+	// 禁止使用者在堆上申请对象
+  void *operator new(size_t) = delete; 
+  void *operator new[](size_t) = delete; 
+}; 
+```
+
+#### 2.2.1 规则 ####
+(1) 必须在函数第一次声明的时候将其声明为 deleted 函数
+(2) 不同于default，delete没有限制为特殊成员函数才能使用delete
+
+## 3. boost中的使用 ##
+
+在支持C++11标准下，noncopyable类定义如下：
+
+```
+class noncopyable {
+	protected:
+		noncopyable() = default;
+		~noncopyable() = defalult;
+
+		noncopyable(const noncopyable& );
+		noncopyable& operator= (const noncopyable&);
+};
+```
